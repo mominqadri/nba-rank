@@ -3,9 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bootstrap": "^4.3.1",
+    "lodash": "^4.17.15",
     "react": "^16.10.1",
+    "react-bootstrap": "^1.0.0-beta.12",
     "react-dom": "^16.10.1",
-    "react-scripts": "3.1.2"
+    "react-helmet": "^5.2.1",
+    "react-router-dom": "^5.1.1",
+    "react-scripts": "3.1.2",
+    "react-tippy": "^1.2.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -27,5 +33,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "homepage": "http://bravehager.github.io/nba-rank"
 }

@@ -26,6 +26,10 @@
   text-decoration: none !important;
 }
 
+.header {
+  margin-top: 10px;
+}
+
 .player-name {
   font-size: 2rem;
 }
@@ -55,4 +59,17 @@
 .mention {
   font-size: 1.4rem;
   margin-bottom: 10px;
+}
+
+.search {
+  margin-top: 15px;
+}
+
+#downshift-0-menu {
+  padding-top: 5px;
+  float: left;
+  width: 95%;
+  padding: 0.375rem 0.75rem 0.375rem 0.25rem;
+  z-index: 1000;
+  position: absolute;
 }

@@ -44,7 +44,7 @@ export class Player extends React.Component {
     } = this.state.player;
     console.log(mentions);
     if (this.state.isLoading) {
-      return <h1>Loading</h1>;
+      return <h1>Loading...</h1>;
     }
     return (
       <div>
@@ -74,17 +74,16 @@ export class Player extends React.Component {
                 return (
                   <div className="mention" key={index}>
                     <span className="mention-scores">
-                      +
+                      <span> {upvotes} upvotes</span>
                       <span
                         style={{
-                          color: upvotes < 0 ? "red" : "green",
-                          marginRight: "10px"
+                          color: sentiment < 0 ? "red" : "green",
+                          marginLeft: "20px"
                         }}
                       >
-                        {" "}
-                        {upvotes}
-                      </span>{" "}
-                      {sentiment}
+                        {(sentiment * 100).toFixed(1)}
+                        <span style={{ fontSize: "1.2rem" }}>ss</span>
+                      </span>
                     </span>
                     <br></br>
                     <span className="mention-quote">
@@ -108,17 +107,16 @@ export class Player extends React.Component {
                 return (
                   <div className="mention" key={index}>
                     <span className="mention-scores">
-                      +
+                      <span> {upvotes} upvotes</span>
                       <span
                         style={{
-                          color: upvotes < 0 ? "red" : "green",
-                          marginRight: "10px"
+                          color: sentiment < 0 ? "red" : "green",
+                          marginLeft: "20px"
                         }}
                       >
-                        {" "}
-                        {upvotes}
-                      </span>{" "}
-                      {sentiment}
+                        {(sentiment * 100).toFixed(1)}
+                        <span style={{ fontSize: "1.2rem" }}>ss</span>
+                      </span>
                     </span>
                     <br></br>
                     <span className="mention-quote">

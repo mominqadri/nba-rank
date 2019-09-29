@@ -42,7 +42,7 @@ export const Player = ({
             {" "}
             <span className="score sentiment-score">
               {(sentimentScore * 100).toFixed(1)}
-              <sup>*</sup>
+              <span style={{ fontSize: "1.4rem" }}>ss</span>
             </span>
           </Tooltip>
         </Col>
@@ -50,13 +50,13 @@ export const Player = ({
           <Tooltip
             className="tool-tip"
             followCursor={true}
-            title="Polarity score is a function of how controversial the mentions of a player are. Players with more high polarity mentions (either high upvotes or high downvotes) are more polar."
+            title="Polarity score is a function of how controversial the mentions of a player are. Players with more higher polarity mentions (either high upvotes or high downvotes) are more polar."
             position="bottom"
             trigger="mouseenter"
           >
             <p className="score polarity-score">
               {(polarityScore * 100).toFixed(1)}
-              <sup>*</sup>
+              <span style={{ fontSize: "1.4rem" }}>ps</span>
             </p>
           </Tooltip>
         </Col>

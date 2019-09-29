@@ -47,4 +47,16 @@ app.get("/players", (req, res) => {
     });
 });
 
+app.get("/players/:id", (req, res) => {
+  const id = req.params.id;
+  Player.findOne({ id }).exec((err, player) => {
+    if (err) {
+      return res.status(400).send({
+        error: { status: 400, message: err.message }
+      });
+    }
+    res.send(player);
+  });
+});
+
 app.listen(PORT, () => console.log(`nba-rank listening on port ${PORT}...`));

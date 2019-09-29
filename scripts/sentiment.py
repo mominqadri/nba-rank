@@ -33,8 +33,6 @@ def main():
             for id, mentions in tqdm(get_mentioned_players(comment["body"]).items()):
                 for sentence, weight in mentions:
                     sentiment = analyzer.polarity_scores(sentence)["compound"]
-                    if -0.3 < sentiment < 0.3:
-                        continue
                     mention = {"submission_id": submission_id, "title": title, "text": body, "sentence": sentence,
                                "upvotes": upvotes, "sentiment": sentiment}
                     db.players.update_one(

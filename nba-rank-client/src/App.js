@@ -1,19 +1,26 @@
 import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 
 export default class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { players: [] };
+    this.state = { players: [], isLoading: false };
+  }
+
+  fetchPlayers() {
+    this.setState({ isLoading: true }, () => {
+      fetch("https://nba-rank.herokuapp.com/players")
+        .then(res => res.json())
+        .then(res => {
+          console.log("hello");
+          console.log(res);
+          this.setState({ players: res.players });
+        });
+    });
   }
 
   componentDidMount() {
-    fetch("https://nba-rank.herokuapp.com/players")
-      .then(res => res.json())
-      .then(res => {
-        this.setState({ players: this.state.players.append(res.players) });
-      });
+    this.fetchPlayers();
   }
 
   render() {

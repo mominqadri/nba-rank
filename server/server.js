@@ -6,7 +6,7 @@ const DB_URI = process.env.DB_URI;
 const PORT = process.env.PORT;
 
 const app = express();
-const db = mongoose.connect(DB_URI, {
+mongoose.connect(DB_URI, {
     useFindAndModify: true,
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -25,14 +25,15 @@ const playerSchema = new mongoose.Schema({
 const Player = mongoose.model("player", playerSchema, "players");
 
 app.get("/players", (req, res) => {
-    let query = {};
     let { limit = 20, offset = 0 } = req.query;
+    limit = parseInt(limit);
+    offset = parseInt(offset);
     if (limit > 50) limit = 50;
 
     Player.find({})
         .select("-mentions")
-        .limit(parseInt(limit))
-        .skip(parseInt(limit * offset))
+        .limit(limit)
+        .skip(limit * offset)
         .sort({ num_mentions: -1 })
         .exec((err, players) => {
             if (err) {

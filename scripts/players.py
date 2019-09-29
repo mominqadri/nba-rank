@@ -4,7 +4,7 @@ from pymongo import MongoClient
 from dotenv import load_dotenv
 
 load_dotenv()
-FILE_PATH = "players/players.json"
+FILE_PATH = "scripts/players/players.json"
 
 db = MongoClient(os.getenv("DB_URI")).Main
 
@@ -12,7 +12,10 @@ db = MongoClient(os.getenv("DB_URI")).Main
 def main():
     db.players.create_index("id", unique=True)
     for player in players():
-        db.players.insert_one(player)
+        try:
+            db.players.insert_one(player)
+        except:
+            continue
 
 
 def players():
@@ -26,11 +29,11 @@ def players():
                     team_id = 1610612750
                     rookie = True
                 names = player[1].strip().split(",")
-                first_name = names[0].strip()
+                last_name = names[0].strip()
                 if len(names) > 1:
-                    last_name = names[1].strip()
+                    first_name = names[1].strip()
                 else:
-                    last_name = None
+                    first_name = None
                 team = get_team(team_id)
                 yield {"id": player[0], "first_name": first_name, "last_name": last_name, "team": team, "rookie": rookie}
             else:

@@ -47,4 +47,27 @@ app.get("/players", (req, res) => {
     });
 });
 
+app.get("/players/:id", (req, res) => {
+  const id = req.params.id;
+  Player.findOne({ id }).exec((err, player) => {
+    if (err) {
+      return res.status(400).send({
+        error: { status: 400, message: err.message }
+      });
+    }
+    res.send(player);
+  });
+});
+
+app.get("/autocomplete", (req, res) => {
+  Player.find({}, "id first_name last_name").exec((err, players) => {
+    if (err) {
+      return res.status(400).send({
+        error: { status: 400, message: err.message }
+      });
+    }
+    res.send(players);
+  });
+});
+
 app.listen(PORT, () => console.log(`nba-rank listening on port ${PORT}...`));

@@ -21,8 +21,9 @@ def main():
         num_mentions = len(player.get("mentions")
                            ) if player.get("mentions") else 0
         sentiment = calculate_sentiment(player.get("mentions"))
+        polarity = calculate_polarity(player.get("mentions"))
         db.players.update_one({"id": id}, {
-                              "$set": {"num_mentions": num_mentions, "sentiment_score": sentiment}})
+                              "$set": {"num_mentions": num_mentions, "sentiment_score": sentiment, "polarity_score": polarity}})
 
 
 def calculate_sentiment(mentions):
@@ -47,11 +48,23 @@ def calculate_sentiment(mentions):
     return sum/length
 
 
+def calculate_polarity(mentions):
+    if mentions is None or len(mentions) == 0:
+        return 0
+    good = [mention["sentiment"]
+            for mention in mentions if mention["sentiment"] > 0.5]
+    bad = [mention["sentiment"]
+           for mention in mentions if mention["sentiment"] < -0.5]
+    p = len(good)/len(mentions)
+    c = -len(bad)/len(mentions)
+    return ((p-c)/(p+c))*((p+c)/2) if -p != c else p
+
+
 def normalize(x, max, length):
     xp = abs(x)
     if max == 0:
         return 1/length
-    normalized = math.pow(xp/max, 1/8)
+    normalized = math.pow(xp/max, 1/16)
     return normalized
 
 
